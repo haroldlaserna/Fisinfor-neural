@@ -5,7 +5,7 @@
 #include<iomanip>
 #include<fstream>
 #include<string>
-#include</home/elchorco/Documentos/c++/Biblioteca/operadores/numeros.cpp>
+#include"numeros.cpp"
 using namespace std;
 using namespace arma;
 using namespace numeros;
@@ -74,7 +74,7 @@ u.subcube(0,0,0   ,2,2,0)=u0;
 u.subcube(0,0,1   ,2,2,1)=u1;
 u.subcube(0,0,2   ,2,2,2)=u2;
 
-           
+
 
 
         a0 << 1 << 0 << 0 << endr
@@ -85,7 +85,8 @@ u.subcube(0,0,2   ,2,2,2)=u2;
 
 /*******************************************************/
 
-for(i=0;i<=10000000;i++){
+for(i=0;i<=50000;i++){
+
 
 a001=sigmoide(suma(0,1,a,u,w));
 a101=sigmoide(suma(1,1,a,u,w));
@@ -110,8 +111,8 @@ if(0.5*pow(sal-a(0,0,2),2)*100>=0.5)
 
    u(0,0,1)-=alpha*e01;
    u(1,0,1)-=alpha*e11;
-   
-  archivo_sal << i <<"   "<<0.5*pow(sal-a(0,0,2),2)*100 
+
+  archivo_sal << i <<"   "<<0.5*pow(sal-a(0,0,2),2)*100
      << "  " << a(0,0,2)
      << "  " << w(0,0,0)
      << "  " << w(0,1,0)
@@ -119,12 +120,12 @@ if(0.5*pow(sal-a(0,0,2),2)*100>=0.5)
      << "  " << w(1,0,1)
      << "  " << u(0,0,1)
      << "  " << u(1,0,1) << endl;
-   
+
 }
 
 else {
 
-archivo_sal <<0.5*pow(sal-a(0,0,2),2)*100 
+archivo_sal <<0.5*pow(sal-a(0,0,2),2)*100
      << "  " << a(0,0,2)
      << "  " << w(0,0,0)
      << "  " << w(0,1,0)
@@ -146,13 +147,13 @@ return 0;
 float suma(int i,int k,Cube<float> A,Cube<float> U,Cube<float> W)
 {
     int j;
-    float Z; 
+    float Z;
     Z=U(i,0,k);
     for(j=0;j<=k;j++)
     {
-        
+
         Z+=A(j,0,k-1)*W(j,i,k-1);
-        
+
     }
 
 return Z;
@@ -174,17 +175,15 @@ void error(float& salida,Cube<float> A,Cube<float> W,float& error000,float& erro
   float parcial11=A(1,0,1)*(1-A(1,0,1))*W(1,0,1)*A(0,0,2)*(1-A(0,0,2));
 
    /******ERROR******/
-   
+
  error000=-(salida-A(0,0,2))*parcial000;
  error010=-(salida-A(0,0,2))*parcial010;
  error001=-(salida-A(0,0,2))*parcial001;
  error101=-(salida-A(0,0,2))*parcial101;
-   
+
 
 
  error01=-(salida-A(0,0,2))*parcial01;
  error11=-(salida-A(0,0,2))*parcial11;
 
-
 }
-
